@@ -1,3 +1,9 @@
+noseX = 0;
+noseY = 0;
+difference = 0;
+rwX = 0;
+lwX= 0;
+
 function setup()
 {
     video = createCapture(VIDEO);
@@ -12,6 +18,11 @@ function setup()
 function draw()
 {
     background('#d6a08b');
+    
+        textSize(difference);
+        text('Meet', 30, 320);
+        fill('#f51d1d');
+        
 }
 
 function modelLoaded()
@@ -23,6 +34,11 @@ function gotPoses(results)
 {
     if(results.length > 0)
     {
-        console.log(results);
+        lwX = results[0].pose.leftWrist.x;
+        rwX = results[0].pose.rightWrist.x;
+        difference = floor(lwX - rwX);
+
+        
+        console.log("Wrists: " + "leftX = " + lwX + " and rightX = " + rwX );
     }
 }
